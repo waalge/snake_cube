@@ -1,0 +1,450 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>TOY &mdash; snake_cube 0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="snake_cube 0 documentation" href="index.html" />
+    <link rel="prev" title="Welcome to snake_cube’s documentation!" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-toy">
+<span id="toy"></span><h1>TOY<a class="headerlink" href="#module-toy" title="Permalink to this headline">¶</a></h1>
+<p>Model of snake cube: a toy made of strips of cubelets that can be rotated into a n-cube.
+The run method finds all solutions from the given start.</p>
+<dl class="class">
+<dt id="toy.Strip">
+<em class="property">class </em><code class="descclassname">toy.</code><code class="descname">Strip</code><span class="sig-paren">(</span><em>length</em><span class="sig-paren">)</span><a class="headerlink" href="#toy.Strip" title="Permalink to this definition">¶</a></dt>
+<dd><p>Strip of cubelets that make up a single component of toy.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>length</strong> (<em>int</em>) &#8211; number of cubelets in strip.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><strong>ValueError</strong> &#8211; If length is not at least 2</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="toy.Strip.compute_orientaion">
+<code class="descname">compute_orientaion</code><span class="sig-paren">(</span><em>prior_orientation</em><span class="sig-paren">)</span><a class="headerlink" href="#toy.Strip.compute_orientaion" title="Permalink to this definition">¶</a></dt>
+<dd><p>compute abs orientation from orientation of previous strip abs orientation
+and own rel orientation using conventions.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>prior_orientation</strong> (<a class="reference internal" href="#toy.vec" title="toy.vec"><em>vec</em></a>) &#8211; vec of abs orientation of previous strip</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="toy.Strip.get_abs_orientation">
+<code class="descname">get_abs_orientation</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#toy.Strip.get_abs_orientation" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">absolute orientation</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#toy.vec" title="toy.vec">vec</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="toy.Strip.get_coordinates">
+<code class="descname">get_coordinates</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#toy.Strip.get_coordinates" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">list of coordinates from start to end</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="toy.Strip.get_end">
+<code class="descname">get_end</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#toy.Strip.get_end" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">end coordinate of vec</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#toy.vec" title="toy.vec">vec</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="toy.Strip.get_length">
+<code class="descname">get_length</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#toy.Strip.get_length" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">length</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">int</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="toy.Strip.get_relative_orientation">
+<code class="descname">get_relative_orientation</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#toy.Strip.get_relative_orientation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Increment the relative orientation</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">0 - 3 corresponding to the convertion convention established
+in the constants ORIENTATIONS, CONVERSION.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">int</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="toy.Strip.get_start">
+<code class="descname">get_start</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#toy.Strip.get_start" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">start coordinate of vec</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#toy.vec" title="toy.vec">vec</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="toy.Strip.increment_rel_orientation">
+<code class="descname">increment_rel_orientation</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#toy.Strip.increment_rel_orientation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Increment the relative orientation</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">1 if increment has gone from 3 to 0, and 0 otherwise</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">int</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="toy.Strip.set_abs_orientation">
+<code class="descname">set_abs_orientation</code><span class="sig-paren">(</span><em>val</em><span class="sig-paren">)</span><a class="headerlink" href="#toy.Strip.set_abs_orientation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Manually fix absolute orientation.
+Used on initial strips.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>val</strong> (<a class="reference internal" href="#toy.vec" title="toy.vec"><em>vec</em></a>) &#8211; vec or tuple of abs orientation</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="toy.Strip.set_rel_orientation">
+<code class="descname">set_rel_orientation</code><span class="sig-paren">(</span><em>val</em><span class="sig-paren">)</span><a class="headerlink" href="#toy.Strip.set_rel_orientation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the relative orientation</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>val</strong> (<em>int</em>) &#8211; 0 - 3 corresponding to the convertion convention established
+in the constants ORIENTATIONS, CONVERSION.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="toy.Strip.set_start">
+<code class="descname">set_start</code><span class="sig-paren">(</span><em>coordinate</em><span class="sig-paren">)</span><a class="headerlink" href="#toy.Strip.set_start" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the start coordinate</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>coordinate</strong> (<a class="reference internal" href="#toy.vec" title="toy.vec"><em>vec</em></a>) &#8211; vec or tuple of coordinates of start of strip</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="toy.Toy">
+<em class="property">class </em><code class="descclassname">toy.</code><code class="descname">Toy</code><span class="sig-paren">(</span><em>strip_lengths</em><span class="sig-paren">)</span><a class="headerlink" href="#toy.Toy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Toy of cublets attached by string that can be arranged into a cube.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>strip_lengths</strong> (<em>list</em>) &#8211; List of strip lengths</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><strong>ValueError</strong> &#8211; If number of cubelets corresponding to <cite>strip_length</cite> is not a cube number.</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="toy.Toy.compute_next_coordinate">
+<code class="descname">compute_next_coordinate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#toy.Toy.compute_next_coordinate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute properties of live strip from previous strip and rel orientation.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="toy.Toy.ends">
+<code class="descname">ends</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#toy.Toy.ends" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Coordinates of the ends of strips up to and including the current live strip</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="toy.Toy.extend">
+<code class="descname">extend</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#toy.Toy.extend" title="Permalink to this definition">¶</a></dt>
+<dd><p>Increment rel orientations, and update live strip number appropriately, assuming NOT failed.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="toy.Toy.fail">
+<code class="descname">fail</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#toy.Toy.fail" title="Permalink to this definition">¶</a></dt>
+<dd><p>A series of conditions that if any are met mean the current state cannot lead to a solution.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">0 if no immediate reason why the current state cannot reach a solution.
+Otherwise a positive int corresponding to the which condition failed.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">int</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="toy.Toy.finished">
+<code class="descname">finished</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#toy.Toy.finished" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">1 if finished ie incrementing first strip which we have fixed to 0, 0 otherwise</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">int</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="toy.Toy.increment">
+<code class="descname">increment</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#toy.Toy.increment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Increment rel orientations, and update live strip number appropriately, assuming failed.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="toy.Toy.progress">
+<code class="descname">progress</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#toy.Toy.progress" title="Permalink to this definition">¶</a></dt>
+<dd><p>A crude progress bar: A strictly monotonic map from the current state to the interval [0,1)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="toy.Toy.rel_orientations">
+<code class="descname">rel_orientations</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#toy.Toy.rel_orientations" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Relative orietations of strips up to and including the current live strip</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="toy.Toy.run">
+<code class="descname">run</code><span class="sig-paren">(</span><em>verbose=False</em><span class="sig-paren">)</span><a class="headerlink" href="#toy.Toy.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Iterate through all states until fail.
+Record solutions when found.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>verbose</strong> (<em>bool</em>) &#8211; Print regular progress if True</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="toy.Toy.solutions">
+<code class="descname">solutions</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#toy.Toy.solutions" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">All solutions found in run.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="toy.Toy.solved">
+<code class="descname">solved</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#toy.Toy.solved" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">1 if solved ie live strip is ultimate, and ASSUMED NOT failed, 0 otherwise</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">int</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="toy.Toy.start">
+<code class="descname">start</code><span class="sig-paren">(</span><em>rel_orientations</em><span class="sig-paren">)</span><a class="headerlink" href="#toy.Toy.start" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fix initial rel orientations.
+Can then run from some given state.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>rel_orientations</strong> (<em>list</em>) &#8211; list of length k of ints 0 - 3
+corresponding to the initial orientations of the initial k strips</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="toy.vec">
+<code class="descclassname">toy.</code><code class="descname">vec</code><span class="sig-paren">(</span><em>vals</em><span class="sig-paren">)</span><a class="headerlink" href="#toy.vec" title="Permalink to this definition">¶</a></dt>
+<dd><p>Short hand for vector.</p>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="index.html" title="previous chapter">Welcome to snake_cube&#8217;s documentation!</a></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/toy.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, waalge.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      
+      |
+      <a href="_sources/toy.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

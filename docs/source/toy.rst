@@ -1,0 +1,7 @@
+TOY
+===
+
+.. automodule:: toy
+    :members:
+
+
