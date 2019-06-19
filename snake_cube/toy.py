@@ -40,7 +40,7 @@ class Toy(object):
     def __init__(self, strip_lengths):
         cube_size_3 = sum(strip_lengths) - len(strip_lengths) + 1
         self._cube_size = round((cube_size_3)**(1/3))
-        if self._cube_size**3 - cube_size_3 == 0:
+        if self._cube_size**3 - cube_size_3 != 0:
             raise(ValueError, "Number of cubelets must equal a cube number")
         self._strips = [Strip(k) for k in strip_lengths]
         #initial
@@ -51,6 +51,7 @@ class Toy(object):
         self.compute_next_coordinate()
         self._total_states = self._cube_size**(len(self._strips)-2)
         self._solutions = []
+        self._rel_solutions = []
         self._fail_cnt = 0
         pass
 
@@ -147,14 +148,15 @@ class Toy(object):
                 self.increment()
             elif self.solved():
                 self._solutions.append(self.ends())
+                self._rel_solutions.append(self.rel_orientations())
                 if verbose:
                     print("Solution found")
-                    print(", ".join([str(tuple(x)) for x in self.ends()]))
+                    print(", ".join([str(x) for x in self.rel_orientations()]))
                 self.increment()
             else:
                 self.extend()
             if verbose:
-                if self.progress() > previous_progress + 0.001:
+                if self.progress() > previous_progress + 0.01:
                     print("Progress ", self.progress(), self._fail_cnt, self.rel_orientations())
                     previous_progress = self.progress()
 
@@ -183,10 +185,17 @@ class Toy(object):
 
     def solutions(self):
         """
-        :returns:   All solutions found in run.
+        :returns:   All solutions as ends found in run.
         :rtype:     list
         """
         return self._solutions
+
+    def rel_solutions(self):
+        """
+        :returns:   All solutions as rel orientations found in run.
+        :rtype:     list
+        """
+        return self._rel_solutions
 
 class Strip(object):
     """
