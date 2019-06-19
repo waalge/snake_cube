@@ -6,7 +6,7 @@ import numpy as np
 
 def vec(vals):
     """
-    Short hand for a vector (numpy array) 
+    Short hand for a vector (numpy array)
     :param list vals: list of numeric values representing a vector
     :returns:   np array of vals
     :rtype:     np array
@@ -40,8 +40,8 @@ class Toy(object):
     def __init__(self, strip_lengths):
         cube_size_3 = sum(strip_lengths) - len(strip_lengths) + 1
         self._cube_size = round((cube_size_3)**(1/3))
-        if self._cube_size**3 - cube_size_3 == 0:
-            raise(ValueError, "Number of cubelets must equal a cube number")
+        if self._cube_size**3 - cube_size_3 != 0:
+            raise ValueError("Number of cubelets must equal a cube number")
         self._strips = [Strip(k) for k in strip_lengths]
         #initial
         self._strips[0].set_start(vec((0, 0, 0)))
@@ -52,7 +52,6 @@ class Toy(object):
         self._total_states = self._cube_size**(len(self._strips)-2)
         self._solutions = []
         self._fail_cnt = 0
-        pass
 
     def compute_next_coordinate(self):
         """
@@ -75,10 +74,10 @@ class Toy(object):
         """
         self._fail_cnt += 1
         ## Outside of box.
-        for ii in (0, 1, 2):
-            max_coordinate = max([p[ii] for p in self.ends()]+[0])  # start point
-            min_coordinate = min([p[ii] for p in self.ends()]+[0])
-            if max_coordinate - min_coordinate > 3:
+        for coord_ii in (0, 1, 2):
+            max_coordinate = max([p[coord_ii] for p in self.ends()]+[0])  # start point
+            min_coordinate = min([p[coord_ii] for p in self.ends()]+[0])
+            if max_coordinate - min_coordinate > self._cube_size:
                 return 1
 
         ## Overlap. This is not efficient. Should just check latest new strip.
@@ -97,10 +96,10 @@ class Toy(object):
         :param list rel_orientations: list of length k of ints 0 - 3
                 corresponding to the initial orientations of the initial k strips
         """
-        for ii, rel_orientation in enumerate(rel_orientations):
-            self._strips[ii].set_rel_orientation(rel_orientation)
-            if ii > 0:
-                self._live_strip_n = ii
+        for cnt, rel_orientation in enumerate(rel_orientations):
+            self._strips[cnt].set_rel_orientation(rel_orientation)
+            if cnt > 0:
+                self._live_strip_n = cnt
                 self.compute_next_coordinate()
         #print(self.ends())
 
@@ -110,8 +109,8 @@ class Toy(object):
 
         """
         return sum([strip.get_relative_orientation() * self._cube_size
-                    ** (len(self._strips) - ii - 1) for ii, strip in enumerate(self._strips)
-                    if 2 <= ii <= self._live_strip_n]) / self._total_states
+                    ** (len(self._strips) - cnt - 1) for cnt, strip in enumerate(self._strips)
+                    if 2 <= cnt <= self._live_strip_n]) / self._total_states
 
     def ends(self):
         """
@@ -197,7 +196,7 @@ class Strip(object):
     """
     def __init__(self, length):
         if length < 2:
-            raise(ValueError, "Length of strip must be at least 2")
+            raise ValueError("Length of strip must be at least 2")
         self._length = length
         self._rel_orientation = None
         self._abs_orientation = None
