@@ -49,7 +49,7 @@ class Toy(object):
         self._strips[1].set_rel_orientation(0)
         self._live_strip_n = 1
         self.compute_next_coordinate()
-        self._total_states = self._cube_size**(len(self._strips)-2)
+        self._total_states = 4**(len(self._strips)-2)
         self._solutions = []
         self._rel_solutions = []
         self._fail_cnt = 0
@@ -78,7 +78,7 @@ class Toy(object):
         for coord_ii in (0, 1, 2):
             max_coordinate = max([p[coord_ii] for p in self.ends()]+[0])  # start point
             min_coordinate = min([p[coord_ii] for p in self.ends()]+[0])
-            if max_coordinate - min_coordinate > self._cube_size:
+            if max_coordinate - min_coordinate >= self._cube_size:
                 return 1
 
         ## Overlap. This is not efficient. Should just check latest new strip.
@@ -104,14 +104,24 @@ class Toy(object):
                 self.compute_next_coordinate()
         #print(self.ends())
 
+    def enumerate_state(self, state = None):
+        """
+        Strictly monotonic map from rel orientation state to natural numbers. 
+
+        :param list state: list of rel orientations. 
+        """
+        if state == None:
+            state = self.rel_orientations()
+
+        return sum([rel_orientation * 4
+                    ** (len(self._strips) - cnt - 1) for cnt, rel_orientation in enumerate(state)
+                    if 1 <= cnt ])
+
     def progress(self):
         """
         A crude progress bar: A strictly monotonic map from the current state to the interval [0,1)
-
         """
-        return sum([strip.get_relative_orientation() * self._cube_size
-                    ** (len(self._strips) - cnt - 1) for cnt, strip in enumerate(self._strips)
-                    if 2 <= cnt <= self._live_strip_n]) / self._total_states
+        return self.enumerate_state() / self._total_states
 
     def ends(self):
         """
@@ -125,16 +135,9 @@ class Toy(object):
         :returns:   Relative orietations of strips up to and including the current live strip
         :rtype:     list
         """
-        return [s.get_relative_orientation() for s in self._strips[1:self._live_strip_n + 1]]
+        return [s.get_relative_orientation() for s in self._strips[:self._live_strip_n + 1]]
 
-    def finished(self):
-        """
-        :returns:   1 if finished ie incrementing first strip which we have fixed to 0, 0 otherwise
-        :rtype:     int
-        """
-        return self._strips[1].get_relative_orientation() != 0
-
-    def run(self, verbose=False):
+    def run(self, finish_state = None, verbose=False):
         """
         Iterate through all states until fail.
         Record solutions when found.
@@ -142,7 +145,12 @@ class Toy(object):
         :param bool verbose:   Print regular progress if True
         """
         previous_progress = 0
-        while not self.finished():
+        if finish_state == None:
+            finish_val = self._total_states # Should be max value of a run
+        else:
+            finish_val = self.enumerate_state(finish_state)
+
+        while self.enumerate_state() < finish_val:
             if self.fail():
                 self.increment()
             elif self.solved():
