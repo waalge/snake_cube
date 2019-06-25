@@ -46,6 +46,7 @@ class Toy(object):
         #initial
         self._strips[0].set_start(vec((0, 0, 0)))
         self._strips[0].set_abs_orientation(ORIENTATIONS[0])
+        self._strips[0].set_rel_orientation(0)
         self._strips[1].set_rel_orientation(0)
         self._live_strip_n = 1
         self.compute_next_coordinate()
