@@ -51,6 +51,7 @@ class Toy(object):
         self._live_strip_n = 1
         self.compute_next_coordinate()
         self._total_states = 4**(len(self._strips)-2)
+        self._finish_val = self._total_states
         self._solutions = []
         self._rel_solutions = []
         self._fail_cnt = 0
@@ -150,6 +151,8 @@ class Toy(object):
             finish_val = self._total_states # Should be max value of a run
         else:
             finish_val = self.enumerate_state(finish_state)
+
+        self._finish_val = finish_val
 
         while self.enumerate_state() < finish_val:
             if self.fail():

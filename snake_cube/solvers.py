@@ -76,11 +76,41 @@ def concurrent_asyncio(strip_lengths):
     loop.run_until_complete(asyncio.gather(*tasks))
     flat_results = [res for task in tasks for res in task.result()] 
     return flat_results
+from multiprocessing import Process, Queue
+from mpToy import MPToy
+
+def mp_toy_subprocess(strip_lengths, start, end, idle_queue, job_queue, solutions_queue):
+    T = MPToy(strip_lengths, idle_queue, job_queue) 
+    T.start(start) 
+    T.run(finish_state = end) 
+    print("I'm finished") 
+    for rel_sol in  T.rel_solutions():
+        solutions_queue.put(rel_sol) 
+    
+def str_vec(v):
+    return "".join([str(xi) for xi in v])
+
+def mp_with_queues(strip_lengths):
+    job_queue = Queue()  
+    idle_queue = Queue()  
+    solutions_queue = Queue()  
+    T = MPToy(strip_lengths, job_queue, idle_queue)
+    starts, ends = T.split(split_into = 4)
+    processes = []
+    for cnt in range(4): 
+        p = Process(target=mp_toy_subprocess, args=(strip_lengths, starts[cnt], ends[cnt], idle_queue, job_queue, solutions_queue))
+        p.start()
+        processes.append(p) 
+    results = [] 
+    [p.join() for p in processes] 
+    while not solutions_queue.empty():
+        results.append(solutions_queue.get())
+    return results
 
 solvers = [
         {
-            "name":"concurrent_asyncio solver", 
-            "solver": concurrent_asyncio
+            "name":"mp_with_queues solver", 
+            "solver": mp_with_queues
         },
         {
             "name":"embarrassingly_parallel solver", 
