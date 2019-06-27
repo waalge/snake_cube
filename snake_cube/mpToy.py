@@ -1,3 +1,8 @@
+"""
+Similar to toy but handles queues within the run routine. 
+And has some addtional helpful functions. 
+"""
+
 import toy 
 import multiprocessing, math 
 
@@ -31,6 +36,9 @@ class MPToy(toy.Toy):
 
 
     def evaluate_state_val(self, state_val): 
+        """
+        Inverse to enumerate_state function. 
+        """
         n_states = len(self._strips)
         v = [0]*n_states
         for cnt in range(n_states):
@@ -40,6 +48,7 @@ class MPToy(toy.Toy):
 
     def run(self, finish_state = None, verbose=False):
         """
+        Similar to Toy.run but puts and gets items on queues appropriately. 
         """
         previous_progress = 0
         if finish_state == None:
