@@ -1,5 +1,5 @@
 import toy 
-import multiprocessing, math
+import multiprocessing, math 
 
 vec = toy.vec
 ORIENTATIONS = toy.ORIENTATIONS
@@ -67,28 +67,28 @@ class MPToy(toy.Toy):
                     print("Progress ", self.progress(), self._fail_cnt, self.rel_orientations())
                     previous_progress = self.progress()
             if loop_cnt > idle_queue_check_threshold:
-                #print("Doing a check") 
                 loop_cnt = 0 
-                if not self._idle_queue.empty() and finish_val - self.enumerate_state() > 100: 
-                    #print("I'm splitting") 
+                if not self._idle_queue.empty(): 
+                    # print("I'm splitting", finish_val) 
                     process = self._idle_queue.get()
                     start_end = self.split(finish_val)
                     self._job_queue.put(start_end)
                     finish_val = self.enumerate_state(start_end[1][0])
+                    # print("split", finish_val) 
         try: 
             if self._idle_queue.qsize() >= 3:
-                print("ALL IDLE")
+                # print("ALL IDLE")
                 for cnt in range(4): 
                     self._job_queue.put("QUIT") 
                 return None
             self._idle_queue.put("idle") 
-            #print("I'm idle", finish_val) 
-            start_end = self._job_queue.get(True, 10) 
+            # print("I'm idle", finish_val, self._idle_queue) 
+            start_end = self._job_queue.get() 
             if start_end == "QUIT": 
                 return None
             start = start_end[0][1]
             end = start_end[1][1]
-            #print("New job", str_vec(start), str_vec(end))
+            # print("New job", str_vec(start), str_vec(end))
 
             self.start(start) 
             self.run(end) 

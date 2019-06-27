@@ -16,7 +16,7 @@ class TestSolver(unittest.TestCase):
         for each cube in cube_data 
         """
         cubes = cube_data.cubes 
-        for cube in cubes: 
+        for cube in cubes[2:]: 
             print("Cube of size ", cube["cube_side_length"]) 
             for solver_dic in solvers.solvers:
                 print("Solver ", solver_dic["name"]) 

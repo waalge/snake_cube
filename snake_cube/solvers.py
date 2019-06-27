@@ -96,6 +96,8 @@ def mp_with_queues(strip_lengths):
     solutions_queue = Queue()  
     T = MPToy(strip_lengths, job_queue, idle_queue)
     starts, ends = T.split(split_into = 4)
+    #print("\n".join([str_vec(v) for v in starts])) 
+    #print("\n".join([str_vec(v) for v in ends])) 
     processes = []
     for cnt in range(4): 
         p = Process(target=mp_toy_subprocess, args=(strip_lengths, starts[cnt], ends[cnt], idle_queue, job_queue, solutions_queue))
