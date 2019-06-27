@@ -5,10 +5,10 @@
 
 import numpy as np
 import vtk
-import solutions
-
 # The colors module defines various useful colors.
 from vtk.util.colors import tomato
+
+import cube_data
 
 def basic_cyclinder():
     # This creates a polygonal cylinder model with eight circumferential
@@ -19,8 +19,8 @@ def basic_cyclinder():
     cylinder.SetRadius(0.03)
     return cylinder
 
-def path_segment(center, rot,length):
-    cylinder = basic_cyclinder() 
+def path_segment(center, rot, length):
+    cylinder = basic_cyclinder()
     cylinder.SetHeight(length)
     # The mapper is responsible for pushing the geometry into the graphics
     # library. It may also do color mapping, if scalars or other
@@ -46,22 +46,22 @@ def path_segment(center, rot,length):
     return cylinderActor
 
 def path(coords):
-    coords = [np.array(c) for c in coords] 
+    coords = [np.array(c) for c in coords]
     segments = []
     for ii, coord in enumerate(coords[:-1]):
-        center = (coord + coords[ii+1])/2 
+        center = (coord + coords[ii+1])/2
         orientaion = (coords[ii+1] - coord)
-        rots = (0,0,0)
+        rots = (0, 0, 0)
         if orientaion[0] != 0:
-            rots = (0,0,-90) 
-            length = abs(orientaion[0]) 
+            rots = (0, 0, -90)
+            length = abs(orientaion[0])
         if orientaion[1] != 0:
-            length = abs(orientaion[1]) 
+            length = abs(orientaion[1])
         if orientaion[2] != 0:
-            length = abs(orientaion[2]) 
-            rots = (90,0,0) 
-        segments.append(path_segment(center,rots,length))
-    return segments 
+            length = abs(orientaion[2])
+            rots = (90, 0, 0)
+        segments.append(path_segment(center, rots, length))
+    return segments
 
 # Create the graphics structure. The renderer renders into the render
 # window. The render window interactor captures mouse events and will
@@ -74,8 +74,9 @@ iren = vtk.vtkRenderWindowInteractor()
 iren.SetRenderWindow(renWin)
 
 # Add the actors to the renderer, set the background and size
-path_coords = [(0,0,0)] + solutions.solutions[0]
-print("Sols", len(solutions.solutions))
+solutions = cube_data.cubes[2]["abs_solutions"] 
+path_coords = [(0, 0, 0)] + solutions[0]
+print("Sols", len(solutions))
 P = path(path_coords)
 for segment in P:
     ren.AddActor(segment)

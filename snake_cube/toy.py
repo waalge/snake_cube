@@ -106,18 +106,18 @@ class Toy(object):
                 self.compute_next_coordinate()
         #print(self.ends())
 
-    def enumerate_state(self, state = None):
+    def enumerate_state(self, state=None):
         """
-        Strictly monotonic map from rel orientation state to natural numbers. 
+        Strictly monotonic map from rel orientation state to natural numbers.
 
-        :param list state: list of rel orientations. 
+        :param list state: list of rel orientations.
         """
-        if state == None:
+        if state is None:
             state = self.rel_orientations()
 
         return sum([rel_orientation * 4
                     ** (len(self._strips) - cnt - 1) for cnt, rel_orientation in enumerate(state)
-                    if 1 <= cnt ])
+                    if cnt >= 1])
 
     def progress(self):
         """
@@ -139,7 +139,7 @@ class Toy(object):
         """
         return [s.get_relative_orientation() for s in self._strips[:self._live_strip_n + 1]]
 
-    def run(self, finish_state = None, verbose=False):
+    def run(self, finish_state=None, verbose=False):
         """
         Iterate through all states until fail.
         Record solutions when found.
@@ -147,7 +147,7 @@ class Toy(object):
         :param bool verbose:   Print regular progress if True
         """
         previous_progress = 0
-        if finish_state == None:
+        if finish_state is None:
             finish_val = self._total_states # Should be max value of a run
         else:
             finish_val = self.enumerate_state(finish_state)
