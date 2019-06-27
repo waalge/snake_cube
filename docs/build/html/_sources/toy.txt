@@ -1,4 +1,4 @@
-TOY
+Toy 
 ===
 
 .. automodule:: toy

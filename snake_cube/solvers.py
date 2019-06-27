@@ -76,6 +76,7 @@ def concurrent_asyncio(strip_lengths):
     loop.run_until_complete(asyncio.gather(*tasks))
     flat_results = [res for task in tasks for res in task.result()] 
     return flat_results
+
 from multiprocessing import Process, Queue
 from mpToy import MPToy
 

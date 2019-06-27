@@ -12,9 +12,9 @@ Contents:
    :maxdepth: 2
 
    toy.rst
-
-
-
+   mpToy.rst
+   visualize.rst
+   solvers.rst
 
 Indices and tables
 ==================
