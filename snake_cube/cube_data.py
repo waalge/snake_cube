@@ -7,7 +7,7 @@ Keys:
     - rel_solutions
 """
 
-cubes = [
+CUBES = [
         {
         "strip_lengths"     : [2,2,2,2,2,2,2],
         "cube_side_length"  : 2,

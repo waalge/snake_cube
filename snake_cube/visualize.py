@@ -1,18 +1,22 @@
 #!/usr/bin/env python3
 
-# This simple example shows how to do basic rendering and pipeline
-# creation.
+"""
+Create a visualization of solution.
+Feeds the absolute coordinates of a solution into vtk.
+
+Code adapted from one of the examples on vtk wiki.
+"""
 
 import numpy as np
 import vtk
-# The colors module defines various useful colors.
 from vtk.util.colors import tomato
 
 import cube_data
 
 def basic_cyclinder():
-    # This creates a polygonal cylinder model with eight circumferential
-    # facets.
+    """
+    Basic attributes of a cylinder used by segment
+    """
     cylinder = vtk.vtkCylinderSource()
     cylinder.SetResolution(15)
     cylinder.SetHeight(1)
@@ -20,25 +24,18 @@ def basic_cyclinder():
     return cylinder
 
 def path_segment(center, rot, length):
+    """
+    Orient cylinder to be path segment.
+    """
     cylinder = basic_cyclinder()
     cylinder.SetHeight(length)
-    # The mapper is responsible for pushing the geometry into the graphics
-    # library. It may also do color mapping, if scalars or other
-    # attributes are defined.
     cylinderMapper = vtk.vtkPolyDataMapper()
     cylinderMapper.SetInputConnection(cylinder.GetOutputPort())
 
-    # The actor is a grouping mechanism: besides the geometry (mapper), it
-    # also has a property, transformation matrix, and/or texture map.
-    # Here we set its color and rotate it -22.5 degrees.
     cylinderActor = vtk.vtkActor()
     cylinderActor.SetMapper(cylinderMapper)
     cylinderActor.GetProperty().SetColor(tomato)
     cylinderActor.SetPosition(center)
-    #print("Orient", cylinderActor.GetOrientation())
-    #cylinderActor.SetOrientation(orientation)
-    #cylinder_methods = [method_name for method_name in dir(cylinderActor) if callable(getattr(cylinderActor, method_name))]
-    #print(cylinder_methods)
 
     cylinderActor.RotateX(rot[0])
     cylinderActor.RotateY(rot[1])
@@ -46,11 +43,14 @@ def path_segment(center, rot, length):
     return cylinderActor
 
 def path(coords):
+    """
+    Concatenate a list of path segments.
+    """
     coords = [np.array(c) for c in coords]
     segments = []
-    for ii, coord in enumerate(coords[:-1]):
-        center = (coord + coords[ii+1])/2
-        orientaion = (coords[ii+1] - coord)
+    for cnt, coord in enumerate(coords[:-1]):
+        center = (coord + coords[cnt+1])/2
+        orientaion = (coords[cnt+1] - coord)
         rots = (0, 0, 0)
         if orientaion[0] != 0:
             rots = (0, 0, -90)
@@ -63,11 +63,7 @@ def path(coords):
         segments.append(path_segment(center, rots, length))
     return segments
 
-if __name__ == "__main__":
-    # Create the graphics structure. The renderer renders into the render
-    # window. The render window interactor captures mouse events and will
-    # perform appropriate camera or actor manipulation depending on the
-    # nature of the events.
+if __name__ == '__main__':
     ren = vtk.vtkRenderer()
     renWin = vtk.vtkRenderWindow()
     renWin.AddRenderer(ren)
@@ -75,7 +71,7 @@ if __name__ == "__main__":
     iren.SetRenderWindow(renWin)
 
     # Add the actors to the renderer, set the background and size
-    solutions = cube_data.cubes[2]["abs_solutions"] 
+    solutions = cube_data.CUBES[2]["abs_solutions"]
     path_coords = [(0, 0, 0)] + solutions[0]
     print("Sols", len(solutions))
     P = path(path_coords)

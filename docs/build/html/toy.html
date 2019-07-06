@@ -1,30 +1,29 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>Toy &mdash; snake_cube 0 documentation</title>
-    
+    <title>Toy &#8212; snake_cube 0 documentation</title>
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
         VERSION:     '0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="snake_cube 0 documentation" href="index.html" />
-    <link rel="next" title="&lt;no title&gt;" href="mpToy.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="MPToy" href="mpToy.html" />
     <link rel="prev" title="Welcome to snake_cube’s documentation!" href="index.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
@@ -32,7 +31,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
 
   </head>
-  <body role="document">
+  <body>
   
 
     <div class="document">
@@ -52,9 +51,9 @@ The run method finds all solutions from the given start.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>length</strong> (<em>int</em>) &#8211; number of cubelets in strip.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>length</strong> (<em>int</em>) – number of cubelets in strip.</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><strong>ValueError</strong> &#8211; If length is not at least 2</td>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><strong>ValueError</strong> – If length is not at least 2</td>
 </tr>
 </tbody>
 </table>
@@ -67,7 +66,7 @@ and own rel orientation using conventions.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>prior_orientation</strong> (<a class="reference internal" href="visualize.html#toy.vec" title="toy.vec"><em>vec</em></a>) &#8211; vec of abs orientation of previous strip</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>prior_orientation</strong> (<a class="reference internal" href="#toy.vec" title="toy.vec"><em>vec</em></a>) – vec of abs orientation of previous strip</td>
 </tr>
 </tbody>
 </table>
@@ -82,7 +81,7 @@ and own rel orientation using conventions.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">absolute orientation</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="visualize.html#toy.vec" title="toy.vec">vec</a></td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#toy.vec" title="toy.vec">vec</a></td>
 </tr>
 </tbody>
 </table>
@@ -112,7 +111,7 @@ and own rel orientation using conventions.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">end coordinate of vec</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="visualize.html#toy.vec" title="toy.vec">vec</a></td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#toy.vec" title="toy.vec">vec</a></td>
 </tr>
 </tbody>
 </table>
@@ -159,7 +158,7 @@ in the constants ORIENTATIONS, CONVERSION.</td>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">start coordinate of vec</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="visualize.html#toy.vec" title="toy.vec">vec</a></td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#toy.vec" title="toy.vec">vec</a></td>
 </tr>
 </tbody>
 </table>
@@ -190,7 +189,7 @@ Used on initial strips.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>val</strong> (<a class="reference internal" href="visualize.html#toy.vec" title="toy.vec"><em>vec</em></a>) &#8211; vec or tuple of abs orientation</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>val</strong> (<a class="reference internal" href="#toy.vec" title="toy.vec"><em>vec</em></a>) – vec or tuple of abs orientation</td>
 </tr>
 </tbody>
 </table>
@@ -204,7 +203,7 @@ Used on initial strips.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>val</strong> (<em>int</em>) &#8211; 0 - 3 corresponding to the convertion convention established
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>val</strong> (<em>int</em>) – 0 - 3 corresponding to the convertion convention established
 in the constants ORIENTATIONS, CONVERSION.</td>
 </tr>
 </tbody>
@@ -219,7 +218,7 @@ in the constants ORIENTATIONS, CONVERSION.</td>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>coordinate</strong> (<a class="reference internal" href="visualize.html#toy.vec" title="toy.vec"><em>vec</em></a>) &#8211; vec or tuple of coordinates of start of strip</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>coordinate</strong> (<a class="reference internal" href="#toy.vec" title="toy.vec"><em>vec</em></a>) – vec or tuple of coordinates of start of strip</td>
 </tr>
 </tbody>
 </table>
@@ -235,9 +234,9 @@ in the constants ORIENTATIONS, CONVERSION.</td>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>strip_lengths</strong> (<em>list</em>) &#8211; List of strip lengths</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>strip_lengths</strong> (<em>list</em>) – List of strip lengths</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><strong>ValueError</strong> &#8211; If number of cubelets corresponding to <cite>strip_length</cite> is not a cube number.</td>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><strong>ValueError</strong> – If number of cubelets corresponding to <cite>strip_length</cite> is not a cube number.</td>
 </tr>
 </tbody>
 </table>
@@ -270,7 +269,7 @@ in the constants ORIENTATIONS, CONVERSION.</td>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>state</strong> (<em>list</em>) &#8211; list of rel orientations.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>state</strong> (<em>list</em>) – list of rel orientations.</td>
 </tr>
 </tbody>
 </table>
@@ -350,7 +349,7 @@ Record solutions when found.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>verbose</strong> (<em>bool</em>) &#8211; Print regular progress if True</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>verbose</strong> (<em>bool</em>) – Print regular progress if True</td>
 </tr>
 </tbody>
 </table>
@@ -395,7 +394,7 @@ Can then run from some given state.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>rel_orientations</strong> (<em>list</em>) &#8211; list of length k of ints 0 - 3
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>rel_orientations</strong> (<em>list</em>) – list of length k of ints 0 - 3
 corresponding to the initial orientations of the initial k strips</td>
 </tr>
 </tbody>
@@ -424,23 +423,23 @@ corresponding to the initial orientations of the initial k strips</td>
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="index.html" title="previous chapter">Welcome to snake_cube&#8217;s documentation!</a></li>
-      <li>Next: <a href="mpToy.html" title="next chapter">&lt;no title&gt;</a></li>
+      <li>Previous: <a href="index.html" title="previous chapter">Welcome to snake_cube’s documentation!</a></li>
+      <li>Next: <a href="mpToy.html" title="next chapter">MPToy</a></li>
   </ul></li>
 </ul>
 </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="_sources/toy.txt"
+      <li><a href="_sources/toy.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
@@ -454,11 +453,11 @@ corresponding to the initial orientations of the initial k strips</td>
       &copy;2019, waalge.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.1</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.7</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
       
       |
-      <a href="_sources/toy.txt"
+      <a href="_sources/toy.rst.txt"
           rel="nofollow">Page source</a>
     </div>
 
