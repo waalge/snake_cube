@@ -314,5 +314,3 @@ class Strip(object):
         val = self._rel_orientation
         prior_index = [(prior_orientation == v).all() for v in ORIENTATIONS].index(1)
         self._abs_orientation = vec(CONVERSION[prior_index][val])
-
-

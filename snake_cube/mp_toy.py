@@ -10,11 +10,15 @@ vec = toy.vec
 ORIENTATIONS = toy.ORIENTATIONS
 CONVERSION = toy.CONVERSION
 
-def str_vec(v):
-    return "".join([str(xi) for xi in v])
+def str_vec(a_vec):
+    """
+    Condense vecs used to print for convenient debugging.
+    """
+    return "".join([str(xi) for xi in a_vec])
 
 class MPToy(toy.Toy):
     """
+    Toy with run method altered to handle queues.
     """
 
     def __init__(self, strip_lengths, idle_queue, job_queue):
@@ -41,11 +45,11 @@ class MPToy(toy.Toy):
         Inverse to enumerate_state function.
         """
         n_states = len(self._strips)
-        v = [0]*n_states
+        state_vector = [0]*n_states
         for cnt in range(n_states):
-            v[cnt] = math.floor(state_val/ 4 ** (n_states - cnt - 1))
-            state_val += - v[cnt] * 4 ** (n_states - cnt - 1)
-        return v
+            state_vector[cnt] = math.floor(state_val/ 4 ** (n_states - cnt - 1))
+            state_val += - state_vector[cnt] * 4 ** (n_states - cnt - 1)
+        return state_vector
 
     def run(self, finish_state=None, verbose=False):
         """
@@ -104,5 +108,3 @@ class MPToy(toy.Toy):
             self.run(end)
         except:
             pass
-
-

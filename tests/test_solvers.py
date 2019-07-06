@@ -16,11 +16,11 @@ class TestSolver(unittest.TestCase):
         for each cube in cube_data
         """
         with open("test.log", "w") as fh: 
-            cubes = cube_data.cubes 
-            for cube in cubes: 
+            CUBES = cube_data.CUBES 
+            for cube in CUBES: 
                 print("Cube of size ", cube["cube_side_length"]) 
                 fh.write("Cube of size " + str(cube["cube_side_length"])) + "\n")
-                for solver_dic in solvers.solvers:
+                for solver_dic in solvers.SOLVERS:
                     print("Solver:  ", solver_dic["name"]) 
                     fh.write("Solver:  " + str(solver_dic["name"]) + "\n")
                     solver = solver_dic["solver"] 
