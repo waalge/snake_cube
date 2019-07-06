@@ -1,0 +1,169 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Solvers &#8212; snake_cube 0 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Visualize" href="visualize.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-solvers">
+<span id="solvers"></span><h1>Solvers<a class="headerlink" href="#module-solvers" title="Permalink to this headline">¶</a></h1>
+<p>A selection of different solvers to compare methods.
+Demonstates that embarrassinly parallel can be improved upon using <cite>multiprocessing.Queue</cite>.</p>
+<dl class="function">
+<dt id="solvers.series_solver">
+<code class="descclassname">solvers.</code><code class="descname">series_solver</code><span class="sig-paren">(</span><em>strip_lengths</em><span class="sig-paren">)</span><a class="headerlink" href="#solvers.series_solver" title="Permalink to this definition">¶</a></dt>
+<dd><p>The basic solver.
+Just run a depth first search, no tricks.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="solvers.embarrassingly_parallel">
+<code class="descclassname">solvers.</code><code class="descname">embarrassingly_parallel</code><span class="sig-paren">(</span><em>strip_lengths</em><span class="sig-paren">)</span><a class="headerlink" href="#solvers.embarrassingly_parallel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Split the task into four at first branching point.
+Uses multiprocessing pool.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="solvers.embarrassingly_parallel_2">
+<code class="descclassname">solvers.</code><code class="descname">embarrassingly_parallel_2</code><span class="sig-paren">(</span><em>strip_lengths</em><span class="sig-paren">)</span><a class="headerlink" href="#solvers.embarrassingly_parallel_2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Split the task into 16 tasks at first, and second branching points.
+Uses multiprocessing pool.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="solvers.mp_with_queues">
+<code class="descclassname">solvers.</code><code class="descname">mp_with_queues</code><span class="sig-paren">(</span><em>strip_lengths</em><span class="sig-paren">)</span><a class="headerlink" href="#solvers.mp_with_queues" title="Permalink to this definition">¶</a></dt>
+<dd><p>More intelligent parallel approach.</p>
+</dd></dl>
+
+<p>Below is the output of the <code class="docutils literal"><span class="pre">test_solvers</span></code> test function.
+All solvers found correct solutions to some known cubes,
+found in <code class="docutils literal"><span class="pre">cube_data.CUBES</span></code>.
+<code class="docutils literal"><span class="pre">mp_with_queues</span></code> is notably faster on the large cube.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Cube</span> <span class="n">of</span> <span class="n">size</span> <span class="mi">2</span>
+<span class="n">Solver</span><span class="p">:</span>  <span class="n">mp_with_queues</span> <span class="n">solver</span>
+<span class="n">Time</span> <span class="n">taken</span> <span class="mf">0.10181832313537598</span>
+<span class="n">Solutions</span> <span class="n">correct</span>
+<span class="n">Solver</span><span class="p">:</span>  <span class="n">embarrassingly_parallel</span> <span class="n">solver</span>
+<span class="n">Time</span> <span class="n">taken</span> <span class="mf">0.12799787521362305</span>
+<span class="n">Solutions</span> <span class="n">correct</span>
+<span class="n">Solver</span><span class="p">:</span>  <span class="n">embarrassingly_parallel_2</span> <span class="n">solver</span>
+<span class="n">Time</span> <span class="n">taken</span> <span class="mf">0.1070094108581543</span>
+<span class="n">Solutions</span> <span class="n">correct</span>
+<span class="n">Solver</span><span class="p">:</span>  <span class="n">simple</span> <span class="n">series</span> <span class="n">solver</span>
+<span class="n">Time</span> <span class="n">taken</span> <span class="mf">0.04367828369140625</span>
+<span class="n">Solutions</span> <span class="n">correct</span>
+<span class="n">Cube</span> <span class="n">of</span> <span class="n">size</span> <span class="mi">3</span>
+<span class="n">Solver</span><span class="p">:</span>  <span class="n">mp_with_queues</span> <span class="n">solver</span>
+<span class="n">Time</span> <span class="n">taken</span> <span class="mf">70.74648237228394</span>
+<span class="n">Solutions</span> <span class="n">correct</span>
+<span class="n">Solver</span><span class="p">:</span>  <span class="n">embarrassingly_parallel</span> <span class="n">solver</span>
+<span class="n">Time</span> <span class="n">taken</span> <span class="mf">69.29563045501709</span>
+<span class="n">Solutions</span> <span class="n">correct</span>
+<span class="n">Solver</span><span class="p">:</span>  <span class="n">embarrassingly_parallel_2</span> <span class="n">solver</span>
+<span class="n">Time</span> <span class="n">taken</span> <span class="mf">82.18489837646484</span>
+<span class="n">Solutions</span> <span class="n">correct</span>
+<span class="n">Solver</span><span class="p">:</span>  <span class="n">simple</span> <span class="n">series</span> <span class="n">solver</span>
+<span class="n">Time</span> <span class="n">taken</span> <span class="mf">188.59162759780884</span>
+<span class="n">Solutions</span> <span class="n">correct</span>
+<span class="n">Cube</span> <span class="n">of</span> <span class="n">size</span> <span class="mi">4</span>
+<span class="n">Solver</span><span class="p">:</span>  <span class="n">mp_with_queues</span> <span class="n">solver</span>
+<span class="n">Time</span> <span class="n">taken</span> <span class="mf">3528.277454137802</span>
+<span class="n">Solutions</span> <span class="n">correct</span>
+<span class="n">Solver</span><span class="p">:</span>  <span class="n">embarrassingly_parallel</span> <span class="n">solver</span>
+<span class="n">Time</span> <span class="n">taken</span> <span class="mf">5591.474845170975</span>
+<span class="n">Solutions</span> <span class="n">correct</span>
+<span class="n">Solver</span><span class="p">:</span>  <span class="n">embarrassingly_parallel_2</span> <span class="n">solver</span>
+<span class="n">Time</span> <span class="n">taken</span> <span class="mf">4452.935115814209</span>
+<span class="n">Solutions</span> <span class="n">correct</span>
+<span class="n">Solver</span><span class="p">:</span>  <span class="n">simple</span> <span class="n">series</span> <span class="n">solver</span>
+<span class="n">Time</span> <span class="n">taken</span> <span class="mf">10254.960399866104</span>
+<span class="n">Solutions</span> <span class="n">correct</span>
+</pre></div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="visualize.html" title="previous chapter">Visualize</a></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/solvers.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, waalge.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.7</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      
+      |
+      <a href="_sources/solvers.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

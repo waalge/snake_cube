@@ -1,0 +1,7 @@
+MPToy 
+=====
+
+.. automodule:: mpToy
+    :members:
+
+
