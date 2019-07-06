@@ -6,6 +6,12 @@
 Welcome to snake_cube's documentation!
 ======================================
 
+Find solutions to a snake_cube_
+using python. 
+
+.. _Python: http://www.python.org/
+.. _snake_cube: https://en.wikipedia.org/wiki/Snake_cube
+
 Contents:
 
 .. toctree::
@@ -15,6 +21,14 @@ Contents:
    mp_toy.rst
    visualize.rst
    solvers.rst
+
+The main class is Toy which models the snake cube toy. 
+This is handled by various solvers, 
+some demonstrating some parallelization to finding a solution. 
+
+We can also visualize solutions using ``vtk``. 
+This makes it easier to use an output solution to actually solve the toy. 
+
 
 Indices and tables
 ==================

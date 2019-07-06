@@ -8,10 +8,10 @@ Solvers
 .. autofunction:: solvers.embarrassingly_parallel_2
 .. autofunction:: solvers.mp_with_queues
 
-Below is the output of the `test_solvers` test function. 
+Below is the output of the ``test_solvers`` test function. 
 All solvers found correct solutions to some known cubes, 
-found in `cube_data.CUBES`. 
-`mp_with_queues` is notably faster on the large cube.
+found in ``cube_data.CUBES``. 
+``mp_with_queues`` is notably faster on the large cube.
 
 ::
 
