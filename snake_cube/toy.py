@@ -4,6 +4,7 @@ The run method finds all solutions from the given start.
 """
 import numpy as np
 
+
 def vec(vals):
     """
     Short hand for a vector (numpy array)
@@ -13,11 +14,12 @@ def vec(vals):
     """
     return np.array(vals)
 
+
 # Fix an ordering of orientations
-ORIENTATIONS = [vec(vals) for vals in [
-    (1, 0, 0), (0, 1, 0), (0, 0, 1),
-    (-1, 0, 0), (0, -1, 0), (0, 0, -1),
-    ]]
+ORIENTATIONS = [
+    vec(vals)
+    for vals in [(1, 0, 0), (0, 1, 0), (0, 0, 1), (-1, 0, 0), (0, -1, 0), (0, 0, -1)]
+]
 
 # Relative to absolute orientation wrt to ORIENTATIONS
 CONVERSION = [
@@ -27,7 +29,8 @@ CONVERSION = [
     [(0, -1, 0), (0, 0, -1), (0, 1, 0), (0, 0, 1)],
     [(0, 0, -1), (-1, 0, 0), (0, 0, 1), (1, 0, 0)],
     [(-1, 0, 0), (0, -1, 0), (1, 0, 0), (0, 1, 0)],
-    ]
+]
+
 
 class Toy(object):
     """
@@ -39,18 +42,18 @@ class Toy(object):
 
     def __init__(self, strip_lengths):
         cube_size_3 = sum(strip_lengths) - len(strip_lengths) + 1
-        self._cube_size = round((cube_size_3)**(1/3))
-        if self._cube_size**3 - cube_size_3 != 0:
+        self._cube_size = round((cube_size_3) ** (1 / 3))
+        if self._cube_size ** 3 - cube_size_3 != 0:
             raise ValueError("Number of cubelets must equal a cube number")
         self._strips = [Strip(k) for k in strip_lengths]
-        #initial
+        # initial
         self._strips[0].set_start(vec((0, 0, 0)))
         self._strips[0].set_abs_orientation(ORIENTATIONS[0])
         self._strips[0].set_rel_orientation(0)
         self._strips[1].set_rel_orientation(0)
         self._live_strip_n = 1
         self.compute_next_coordinate()
-        self._total_states = 4**(len(self._strips)-2)
+        self._total_states = 4 ** (len(self._strips) - 2)
         self._finish_val = self._total_states
         self._solutions = []
         self._rel_solutions = []
@@ -64,7 +67,7 @@ class Toy(object):
         live_strip = self._strips[live_n]
         old_strip = self._strips[live_n - 1]
         live_strip.set_start(old_strip.get_end())
-        #print("x",self._live_strip_n, live_strip.get_start())
+        # print("x",self._live_strip_n, live_strip.get_start())
         live_strip.compute_orientaion(old_strip.get_abs_orientation())
 
     def fail(self):
@@ -78,16 +81,23 @@ class Toy(object):
         self._fail_cnt += 1
         ## Outside of box.
         for coord_ii in (0, 1, 2):
-            max_coordinate = max([p[coord_ii] for p in self.ends()]+[0])  # start point
-            min_coordinate = min([p[coord_ii] for p in self.ends()]+[0])
+            max_coordinate = max(
+                [p[coord_ii] for p in self.ends()] + [0]
+            )  # start point
+            min_coordinate = min([p[coord_ii] for p in self.ends()] + [0])
             if max_coordinate - min_coordinate >= self._cube_size:
                 return 1
 
         ## Overlap. This is not efficient. Should just check latest new strip.
-        coordinates_filled = [coord for strip in self._strips[:self._live_strip_n+1]
-                              for coord in strip.get_coordinates()[1:]] + [vec((0, 0, 0))]
-        if len(list(set([tuple(x) for x in coordinates_filled]))) != len(coordinates_filled):
-            #print("fail 2,", [tuple(x) for x in coordinates_filled])
+        coordinates_filled = [
+            coord
+            for strip in self._strips[: self._live_strip_n + 1]
+            for coord in strip.get_coordinates()[1:]
+        ] + [vec((0, 0, 0))]
+        if len(list(set([tuple(x) for x in coordinates_filled]))) != len(
+            coordinates_filled
+        ):
+            # print("fail 2,", [tuple(x) for x in coordinates_filled])
             return 2
         return 0
 
@@ -104,7 +114,7 @@ class Toy(object):
             if cnt > 0:
                 self._live_strip_n = cnt
                 self.compute_next_coordinate()
-        #print(self.ends())
+        # print(self.ends())
 
     def enumerate_state(self, state=None):
         """
@@ -115,9 +125,13 @@ class Toy(object):
         if state is None:
             state = self.rel_orientations()
 
-        return sum([rel_orientation * 4
-                    ** (len(self._strips) - cnt - 1) for cnt, rel_orientation in enumerate(state)
-                    if cnt >= 1])
+        return sum(
+            [
+                rel_orientation * 4 ** (len(self._strips) - cnt - 1)
+                for cnt, rel_orientation in enumerate(state)
+                if cnt >= 1
+            ]
+        )
 
     def progress(self):
         """
@@ -130,14 +144,16 @@ class Toy(object):
         :returns:   Coordinates of the ends of strips up to and including the current live strip
         :rtype:     list
         """
-        return [tuple(s.get_end()) for s in self._strips[:self._live_strip_n+1]]
+        return [tuple(s.get_end()) for s in self._strips[: self._live_strip_n + 1]]
 
     def rel_orientations(self):
         """
         :returns:   Relative orietations of strips up to and including the current live strip
         :rtype:     list
         """
-        return [s.get_relative_orientation() for s in self._strips[:self._live_strip_n + 1]]
+        return [
+            s.get_relative_orientation() for s in self._strips[: self._live_strip_n + 1]
+        ]
 
     def run(self, finish_state=None, verbose=False):
         """
@@ -148,7 +164,7 @@ class Toy(object):
         """
         previous_progress = 0
         if finish_state is None:
-            finish_val = self._total_states # Should be max value of a run
+            finish_val = self._total_states  # Should be max value of a run
         else:
             finish_val = self.enumerate_state(finish_state)
 
@@ -168,7 +184,12 @@ class Toy(object):
                 self.extend()
             if verbose:
                 if self.progress() > previous_progress + 0.01:
-                    print("Progress ", self.progress(), self._fail_cnt, self.rel_orientations())
+                    print(
+                        "Progress ",
+                        self.progress(),
+                        self._fail_cnt,
+                        self.rel_orientations(),
+                    )
                     previous_progress = self.progress()
 
     def increment(self):
@@ -192,7 +213,7 @@ class Toy(object):
         :returns:   1 if solved ie live strip is ultimate, and ASSUMED NOT failed, 0 otherwise
         :rtype:     int
         """
-        return self._live_strip_n == len(self._strips) -1
+        return self._live_strip_n == len(self._strips) - 1
 
     def solutions(self):
         """
@@ -208,6 +229,7 @@ class Toy(object):
         """
         return self._rel_solutions
 
+
 class Strip(object):
     """
     Strip of cubelets that make up a single component of toy.
@@ -215,6 +237,7 @@ class Strip(object):
     :param int length: number of cubelets in strip.
     :raises ValueError: If length is not at least 2
     """
+
     def __init__(self, length):
         if length < 2:
             raise ValueError("Length of strip must be at least 2")

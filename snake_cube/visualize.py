@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
 
 """
-Create a visualization of solution.
+Create a visualization of a solution.
 Feeds the absolute coordinates of a solution into vtk.
 
-Code adapted from one of the examples on vtk wiki.
+Default: takes a solution for the length 4 snake cube. 
+
+Credits: This code adapted from one of the examples on vtk wiki.
 """
 
 import numpy as np
@@ -12,6 +14,7 @@ import vtk
 from vtk.util.colors import tomato
 
 import cube_data
+
 
 def basic_cyclinder():
     """
@@ -22,6 +25,7 @@ def basic_cyclinder():
     cylinder.SetHeight(1)
     cylinder.SetRadius(0.03)
     return cylinder
+
 
 def path_segment(center, rot, length):
     """
@@ -42,6 +46,7 @@ def path_segment(center, rot, length):
     cylinderActor.RotateZ(rot[2])
     return cylinderActor
 
+
 def path(coords):
     """
     Concatenate a list of path segments.
@@ -49,8 +54,8 @@ def path(coords):
     coords = [np.array(c) for c in coords]
     segments = []
     for cnt, coord in enumerate(coords[:-1]):
-        center = (coord + coords[cnt+1])/2
-        orientaion = (coords[cnt+1] - coord)
+        center = (coord + coords[cnt + 1]) / 2
+        orientaion = coords[cnt + 1] - coord
         rots = (0, 0, 0)
         if orientaion[0] != 0:
             rots = (0, 0, -90)
@@ -63,21 +68,23 @@ def path(coords):
         segments.append(path_segment(center, rots, length))
     return segments
 
-if __name__ == '__main__':
+def visualize(abs_solution=None): 
     ren = vtk.vtkRenderer()
     renWin = vtk.vtkRenderWindow()
     renWin.AddRenderer(ren)
     iren = vtk.vtkRenderWindowInteractor()
     iren.SetRenderWindow(renWin)
 
+    if abs_solution == None: 
+        # Default to a solution already known. 
+        abs_solution = cube_data.CUBES[2]["abs_solutions"][0]
+
     # Add the actors to the renderer, set the background and size
-    solutions = cube_data.CUBES[2]["abs_solutions"]
-    path_coords = [(0, 0, 0)] + solutions[0]
-    print("Sols", len(solutions))
+    path_coords = [(0, 0, 0)] + abs_solution
     P = path(path_coords)
     for segment in P:
         ren.AddActor(segment)
-    ren.SetBackground(0.1, 0.2, 0.4)
+    ren.SetBackground(0.1, 0.1, 0.3)
     renWin.SetSize(200, 200)
 
     # This allows the interactor to initalize itself. It has to be
@@ -92,3 +99,6 @@ if __name__ == '__main__':
 
     # Start the event loop.
     iren.Start()
+
+if __name__ == "__main__": 
+    visualize() 

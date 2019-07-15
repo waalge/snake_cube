@@ -1,10 +1,13 @@
 snake_cube 
 ==========
 
-Find solutions to [snake cubes]() with python. 
+Find all solutions to any [snake cubes](https://en.wikipedia.org/wiki/Snake_cube) using python. 
 
 Solve a new cube?
 =================
+
+`example.py` contains a simple example. 
+
 Lets fix some vocab for talking about snake cubes.
 
 A snake cube is a collection of _cubelets_ attached with a taut string.
@@ -31,14 +34,15 @@ minus the number of strips is one less than the cube of cube size.
 4. Make an instance of `toy.Toy` with this `strip_lengths`.
 Run `Toy.run()` to find all solutions. 
 This may take some time. 
-You can run in verbose method. 
+You can run in verbose mode with updates on progress. 
 If its big (cube size >3) try running it in parallel. See `solvers.mp_with_queue`
 
-5. Dump `Toy.abs_solutions()` to a file.
-See cube_data for examples. 
+5. Dump `Toy.solutions()` to a file.
 
 6. Visualize an absolute solution using `visualize.py`. 
 Use this to help solve the snake cube toy. 
 
+## A Visual
 
+A short screen recording of `visualize.py` is [here](https://youtu.be/DDIHet0Mnbo). 
 
