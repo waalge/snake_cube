@@ -1,12 +1,13 @@
 #!/usr/bin/python3
 
-import unittest
 import sys
 import time
+import unittest
 
-sys.path.append('../snake_cube')
 import cube_data
 import solvers
+
+sys.path.append('../snake_cube')
 
 class TestSolver(unittest.TestCase):
 
@@ -40,4 +41,3 @@ class TestSolver(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
-

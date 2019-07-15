@@ -4,17 +4,20 @@ And has some addtional helpful functions.
 """
 
 import math
+
 import toy
 
 vec = toy.vec
 ORIENTATIONS = toy.ORIENTATIONS
 CONVERSION = toy.CONVERSION
 
+
 def str_vec(a_vec):
     """
     Condense vecs used to print for convenient debugging.
     """
     return "".join([str(xi) for xi in a_vec])
+
 
 class MPToy(toy.Toy):
     """
@@ -33,22 +36,23 @@ class MPToy(toy.Toy):
         if finish_val is None:
             finish_val = self._total_states
         current_val = self.enumerate_state()
-        mid_vals = [round(current_val + cnt * (finish_val - current_val)/split_into)
-                    for cnt in range(split_into)]
+        mid_vals = [
+            round(current_val + cnt * (finish_val - current_val) / split_into)
+            for cnt in range(split_into)
+        ]
         starts = [self.evaluate_state_val(val) for val in mid_vals]
         ends = starts[1:] + [self.evaluate_state_val(finish_val)]
         return starts, ends
-
 
     def evaluate_state_val(self, state_val):
         """
         Inverse to enumerate_state function.
         """
         n_states = len(self._strips)
-        state_vector = [0]*n_states
+        state_vector = [0] * n_states
         for cnt in range(n_states):
-            state_vector[cnt] = math.floor(state_val/ 4 ** (n_states - cnt - 1))
-            state_val += - state_vector[cnt] * 4 ** (n_states - cnt - 1)
+            state_vector[cnt] = math.floor(state_val / 4 ** (n_states - cnt - 1))
+            state_val += -state_vector[cnt] * 4 ** (n_states - cnt - 1)
         return state_vector
 
     def run(self, finish_state=None, verbose=False):
@@ -57,7 +61,7 @@ class MPToy(toy.Toy):
         """
         previous_progress = 0
         if finish_state is None:
-            finish_val = self._total_states # Should be max value of a run
+            finish_val = self._total_states  # Should be max value of a run
         else:
             finish_val = self.enumerate_state(finish_state)
 
@@ -78,7 +82,12 @@ class MPToy(toy.Toy):
                 self.extend()
             if verbose:
                 if self.progress() > previous_progress + 0.01:
-                    print("Progress ", self.progress(), self._fail_cnt, self.rel_orientations())
+                    print(
+                        "Progress ",
+                        self.progress(),
+                        self._fail_cnt,
+                        self.rel_orientations(),
+                    )
                     previous_progress = self.progress()
             if loop_cnt > idle_queue_check_threshold:
                 loop_cnt = 0

@@ -1,10 +1,13 @@
 #!/usr/bin/python3
 
+import os
+import sys
 import unittest
-import os, sys
-sys.path.append('../snake_cube')
-import toy
+
 import solutions
+import toy
+
+sys.path.append('../snake_cube')
 
 class TestSnakeCube(unittest.TestCase):
 
@@ -74,4 +77,3 @@ class TestSnakeCube(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
-
