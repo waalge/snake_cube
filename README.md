@@ -1,7 +1,7 @@
 snake_cube 
 ==========
 
-Find all solutions to any [snake cubes](https://en.wikipedia.org/wiki/Snake_cube) using python. 
+Find all solutions to any [snake cube](https://en.wikipedia.org/wiki/Snake_cube) using python. 
 
 Solve a new cube?
 =================
