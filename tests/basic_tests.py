@@ -9,7 +9,6 @@ sys.path.append("../snake_cube")
 import cube_data
 import toy
 
-
 class TestSnakeCube(unittest.TestCase):
     def test_solutions_pass(self):
         """

@@ -9,7 +9,6 @@ sys.path.append('../snake_cube')
 import cube_data
 import solvers
 
-
 class TestSolver(unittest.TestCase):
 
     def test_solutions_pass(self):
