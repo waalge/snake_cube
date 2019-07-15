@@ -1,12 +1,14 @@
 #!/usr/bin/python3
 
-import unittest
 import sys
 import time
+import unittest
 
 sys.path.append('../snake_cube')
+
 import cube_data
 import solvers
+
 
 class TestSolver(unittest.TestCase):
 
@@ -15,11 +17,12 @@ class TestSolver(unittest.TestCase):
         Solver should return all known rel solutions
         for each cube in cube_data
         """
-        with open("test.log", "w") as fh: 
+        now = time.time()
+        with open("test" + str(now) + ".log", "w") as fh: 
             CUBES = cube_data.CUBES 
             for cube in CUBES: 
                 print("Cube of size ", cube["cube_side_length"]) 
-                fh.write("Cube of size " + str(cube["cube_side_length"])) + "\n")
+                fh.write("Cube of size " + str(cube["cube_side_length"]) + "\n")
                 for solver_dic in solvers.SOLVERS:
                     print("Solver:  ", solver_dic["name"]) 
                     fh.write("Solver:  " + str(solver_dic["name"]) + "\n")
@@ -40,4 +43,3 @@ class TestSolver(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
-

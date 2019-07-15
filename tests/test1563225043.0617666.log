@@ -1,0 +1,15 @@
+Cube of size 2
+Solver:  mp_with_queues solver
+Time taken 0.036241769790649414
+Solutions correct
+Solver:  embarrassingly_parallel solver
+Time taken 0.11285066604614258
+Solutions correct
+Solver:  embarrassingly_parallel_2 solver
+Time taken 0.11113262176513672
+Solutions correct
+Solver:  simple series solver
+Time taken 0.035388946533203125
+Solutions correct
+Cube of size 3
+Solver:  mp_with_queues solver
