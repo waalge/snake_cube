@@ -1,4 +1,4 @@
-from setuptools import setup
+from distutils.core import setup
 
 setup(
    name='snake_cube',
@@ -7,5 +7,4 @@ setup(
    author='waalge',
    author_email='waalgy@gmail.com',
    packages=['snake_cube'],  #same as name
-   install_requires=['vtk'], #external packages as dependencies
 )
