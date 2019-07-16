@@ -29,20 +29,20 @@ Note that even indexed entries correspond to strips going right;
 odd indexed entries correspond to strips going up. 
 
 3. Check that the total sum of all the strip lengths, 
-minus the number of strips is one less than the cube of cube size. 
+minus the number of strips is one less than the cube of the cube size. 
 
-4. Make an instance of `toy.Toy` with this `strip_lengths`.
-Run `Toy.run()` to find all solutions. 
+4. Make an instance of `toy = toy.Toy(strip_lengths)`.
+Run `toy.run()` to find all solutions. 
 This may take some time. 
 You can run in verbose mode with updates on progress. 
 If its big (cube size >3) try running it in parallel. See `solvers.mp_with_queue`
 
-5. Dump `Toy.solutions()` to a file.
+5. Dump `toy.solutions()` to a file.
 
 6. Visualize an absolute solution using `visualize.py`. 
 Use this to help solve the snake cube toy. 
 
 ## A Visual
 
-A short screen recording of `visualize.py` is [here](https://youtu.be/DDIHet0Mnbo). 
+A short screen recording of an example output of `visualize.py` is [here](https://youtu.be/DDIHet0Mnbo). 
 
